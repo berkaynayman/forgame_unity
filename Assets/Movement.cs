@@ -5,7 +5,9 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     public Rigidbody2D rigidbody2D;
-
+    public KeyCode UpKey;
+    public KeyCode DownKey;
+    public float speed = 2;
 
 
     // Start is called before the first frame update
@@ -18,17 +20,24 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.W)) {
-            rigidbody2D.velocity = Vector2.up;
-        } else if (Input.GetKey(KeyCode.S)) {
-            rigidbody2D.velocity = Vector2.down;
-        } else if (Input.GetKey(KeyCode.A)) {
+        // some changesasasdsdsd
+
+        if (Input.GetKey(UpKey) && transform.position.y < 4)
+        {
+            rigidbody2D.velocity = Vector2.up * speed;
+        }
+        else if (Input.GetKey(DownKey) && transform.position.y > -4)
+        {
+            rigidbody2D.velocity = Vector2.down * speed;
+        }
+        
+        /*else if (Input.GetKey(KeyCode.A)) {
             rigidbody2D.velocity = Vector2.left;
         } else if (Input.GetKey(KeyCode.D)) {
             rigidbody2D.velocity = Vector2.right;
         } else {
             rigidbody2D.velocity = Vector2.zero;
-        }
+        }*/
     }
 
     private void OnMouseDown()
