@@ -7,6 +7,10 @@ public class ball : MonoBehaviour
     public Rigidbody2D rigigbody2D;
     public Vector2 lastVelocity;
 
+    public Movement LeftPlayer;
+    public Movement RightPlayer;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +25,9 @@ public class ball : MonoBehaviour
         rigigbody2D.isKinematic = false;
         rigigbody2D.velocity = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * 5f;
         lastVelocity = rigigbody2D.velocity;
+
+        LeftPlayer.speed = LeftPlayer.defaultSpeed;
+        RightPlayer.speed = RightPlayer.defaultSpeed;
     }
 
     // Update is called once per frame
@@ -35,7 +42,9 @@ public class ball : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         rigigbody2D.velocity = Vector2.Reflect(lastVelocity, collision.contacts[0].normal);
-        lastVelocity = rigigbody2D.velocity;
+        lastVelocity = rigigbody2D.velocity * 1.1f;
+        LeftPlayer.speed *= 1.1f;
+        RightPlayer.speed *= 1.1f; 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
